@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autókölcsönző</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ellenőrizzük az URL-ben lévő paramétereket
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('success') && urlParams.has('booking_id')) {
+                const bookingId = urlParams.get('booking_id');
+                showPopup(bookingId);
+            }
+        });
+    
+        function showPopup(bookingId) {
+            const popup = document.createElement("div");
+            popup.className = "popup";
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <h2>Köszönjük a foglalását!</h2>
+                    <p>A foglalás sikeresen rögzítve lett.</p>
+                    <a href="booking_details.php?id=${bookingId}" class="button">Foglalás részletei</a>
+                    <button onclick="closePopup()">Bezárás</button>
+                </div>
+            `;
+            document.body.appendChild(popup); // Hozzáadás az oldalhoz
+            popup.style.display = "block"; // Popup megjelenítése
+        }
+    
+        function closePopup() {
+            const popup = document.querySelector(".popup");
+            if (popup) {
+                popup.remove(); // Popup eltávolítása az oldalról
+            }
+        }
+    </script>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1>Autókölcsönző</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Elérhető autók</h2>
+            <div class="car-list">
+                <div class="car">
+                    <img src="images/toyota.jpg" alt="Toyota Corolla">
+                    <h3>Toyota Corolla</h3>
+                    <a href="car_details.php?car=Toyota">Részletek</a>
+                </div>
+                <div class="car">
+                    <img src="images/bmw.jpg" alt="BMW 320i">
+                    <h3>BMW 320i</h3>
+                    <a href="car_details.php?car=BMW">Részletek</a>
+                </div>
+                <div class="car">
+                    <img src="images/ford.jpg" alt="Ford Focus">
+                    <h3>Ford Focus</h3>
+                    <a href="car_details.php?car=Ford">Részletek</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Autókölcsönző</p>
+    </footer>
+</body>
+</html>
